@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Pharmacie - Accès refusé</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<header class="navbar">
+    <a class="brand" th:href="@{/}"> Pharmacie</a>
+</header>
+
+<main class="container error-page">
+    <div class="code">403</div>
+    <h1>Accès refusé</h1>
+    <p>Désolé <span sec:authentication="name">utilisateur</span>, vous n'avez pas les droits
+        nécessaires pour accéder à cette page.</p>
+    <p>
+        <a class="btn btn-primary" th:href="@{/}">Retour à l'accueil</a>
+    </p>
+</main>
+</body>
+</html>

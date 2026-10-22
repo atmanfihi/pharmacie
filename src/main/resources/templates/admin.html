@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Pharmacie - Administration</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<header class="navbar">
+    <a class="brand" th:href="@{/}"> Pharmacie</a>
+    <nav>
+        <a th:href="@{/medicaments}">Médicaments</a>
+        <a th:href="@{/admin}">Admin</a>
+        <a th:href="@{/caisse}">Caisse</a>
+        <a th:href="@{/client}">Espace client</a>
+        <span class="user-info" sec:authentication="name">utilisateur</span>
+        <form class="inline" th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-danger">Déconnexion</button>
+        </form>
+    </nav>
+</header>
+
+<main class="container">
+    <h1>Interface d'administration</h1>
+    <p>Gestion des utilisateurs et des rôles (accès réservé au rôle ADMIN).</p>
+
+    <div th:if="${message}" class="flash" th:text="${message}">message</div>
+
+    <h2>Utilisateurs</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Identifiant</th>
+            <th>Email</th>
+            <th>Rôles</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="u : ${users}">
+            <td th:text="${u.id}">1</td>
+            <td th:text="${u.username}">user</td>
+            <td th:text="${u.email}">email</td>
+            <td>
+                <span class="tag" th:each="r : ${u.roles}" th:text="${r.name}">ROLE</span>
+            </td>
+            <td>
+                <form class="inline" th:action="@{/admin/users/{id}/delete(id=${u.id})}" method="post"
+                      onsubmit="return confirm('Supprimer cet utilisateur ?');">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2 style="margin-top: 2rem;">Matrice des droits (TP2)</h2>
+    <table>
+        <thead>
+        <tr><th>Route</th><th>Rôles autorisés</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>/admin/**</td><td>ADMIN</td></tr>
+        <tr><td>/medicaments/**</td><td>ADMIN, PHARMACIEN</td></tr>
+        <tr><td>/caisse/**</td><td>ADMIN, PHARMACIEN, CAISSIER</td></tr>
+        <tr><td>/client/**</td><td>ADMIN, PHARMACIEN, CAISSIER, CLIENT</td></tr>
+        <tr><td>API GET /api/**</td><td>Public</td></tr>
+        <tr><td>API POST/PUT/DELETE /api/**</td><td>ADMIN</td></tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

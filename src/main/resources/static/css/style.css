@@ -1,0 +1,186 @@
+/* ==========================================
+   Pharmacie - feuille de style globale
+   ========================================== */
+* { box-sizing: border-box; }
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background: #f4f6f8;
+    color: #2c3e50;
+}
+
+/* ---------- Barre de navigation ---------- */
+.navbar {
+    background: #2c3e50;
+    color: #fff;
+    padding: 0.8rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.navbar .brand {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+}
+
+.navbar a {
+    color: #dfe6e9;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.navbar a:hover { color: #fff; text-decoration: underline; }
+
+.navbar .user-info { color: #b2bec3; font-size: 0.9rem; }
+
+/* ---------- Contenu ---------- */
+.container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h1 { color: #2c3e50; }
+h2 { color: #34495e; }
+
+.flash {
+    background: #e8f8f0;
+    border: 1px solid #2ecc71;
+    color: #1e8449;
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+/* ---------- Tableaux ---------- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+th, td {
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid #e1e4e8;
+    font-size: 0.92rem;
+}
+
+th { background: #2c3e50; color: #fff; }
+
+tr:hover td { background: #f8f9fa; }
+
+/* ---------- Boutons ---------- */
+.btn {
+    display: inline-block;
+    padding: 0.35rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+}
+
+.btn-primary { background: #2980b9; }
+.btn-success { background: #27ae60; }
+.btn-warning { background: #f39c12; }
+.btn-danger  { background: #c0392b; }
+
+.btn:hover { opacity: 0.88; }
+
+/* ---------- Formulaires ---------- */
+form.inline { display: inline; }
+
+.form-card {
+    background: #fff;
+    padding: 1.5rem 2rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    max-width: 640px;
+}
+
+.form-card label { display: block; margin-top: 1rem; font-weight: 600; }
+
+.form-card input[type="text"],
+.form-card input[type="number"],
+.form-card input[type="date"],
+.form-card select,
+.form-card textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 0.25rem;
+}
+
+.checkbox-group { margin-top: 0.5rem; }
+.checkbox-group label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-right: 1rem;
+    font-weight: normal;
+}
+
+.form-actions { margin-top: 1.5rem; display: flex; gap: 0.8rem; }
+
+/* ---------- Cartes d'accueil ---------- */
+.cards {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.card {
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    padding: 1.2rem 1.5rem;
+    flex: 1 1 220px;
+}
+
+.card h3 { margin-top: 0; color: #2c3e50; }
+.card p { font-size: 0.9rem; color: #566573; }
+
+/* ---------- Détail produit ---------- */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0.6rem 1.2rem;
+    background: #fff;
+    padding: 1.5rem 2rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.detail-grid dt { font-weight: bold; color: #34495e; }
+.detail-grid dd { margin: 0; }
+
+.tag {
+    display: inline-block;
+    background: #d6eaf8;
+    color: #1b4f72;
+    padding: 0.15rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    margin-right: 0.3rem;
+}
+
+.error-page { text-align: center; margin-top: 4rem; }
+.error-page .code { font-size: 3rem; color: #c0392b; font-weight: bold; }
