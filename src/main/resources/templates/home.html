@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Pharmacie - Accueil</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<header class="navbar">
+    <a class="brand" th:href="@{/}"> Pharmacie</a>
+    <nav>
+        <span class="user-info" sec:authentication="name">utilisateur</span>
+        <form class="inline" th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-danger">Déconnexion</button>
+        </form>
+    </nav>
+</header>
+
+<main class="container">
+    <h1>Bienvenue sur la pharmacie</h1>
+    <p>Gestion de stock sécurisée — Spring Boot 3, Spring Security, MySQL (TP1 + TP2).</p>
+
+    <div sec:authorize="hasRole('ADMIN')" class="cards">
+        <div class="card">
+            <h3>Interface Admin</h3>
+            <p>Gestion des utilisateurs et des rôles.</p>
+            <a class="btn btn-primary" th:href="@{/admin}">Accéder à /admin</a>
+        </div>
+    </div>
+
+    <div sec:authorize="hasAnyRole('ADMIN','PHARMACIEN')" class="cards">
+        <div class="card">
+            <h3>Gestion des médicaments</h3>
+            <p>Ajouter, modifier, supprimer les produits du stock.</p>
+            <a class="btn btn-success" th:href="@{/medicaments}">Accéder à /medicaments</a>
+        </div>
+    </div>
+
+    <div sec:authorize="hasAnyRole('ADMIN','PHARMACIEN','CAISSIER')" class="cards">
+        <div class="card">
+            <h3>Caisse</h3>
+            <p>Enregistrement des ventes.</p>
+            <a class="btn btn-warning" th:href="@{/caisse}">Accéder à /caisse</a>
+        </div>
+    </div>
+
+    <div sec:authorize="hasAnyRole('ADMIN','PHARMACIEN','CAISSIER','CLIENT')" class="cards">
+        <div class="card">
+            <h3>Espace client</h3>
+            <p>Consultation du catalogue des médicaments.</p>
+            <a class="btn btn-primary" th:href="@{/client}">Accéder à /client</a>
+        </div>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <h3>API REST (TP1)</h3>
+            <p>Endpoints JSON testables via Postman :<br/>
+                <code>/api/produits</code>, <code>/api/categories</code>,<br/>
+                <code>/api/fournisseurs</code>, <code>/api/tags</code></p>
+        </div>
+    </div>
+</main>
+</body>
+</html>

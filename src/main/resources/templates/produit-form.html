@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Pharmacie - Formulaire produit</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<header class="navbar">
+    <a class="brand" th:href="@{/}"> Pharmacie</a>
+    <nav>
+        <a th:href="@{/medicaments}">Médicaments</a>
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin}">Admin</a>
+        <span class="user-info" sec:authentication="name">utilisateur</span>
+        <form class="inline" th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-danger">Déconnexion</button>
+        </form>
+    </nav>
+</header>
+
+<main class="container">
+    <h1 th:text="${produit.id != null} ? 'Modifier le produit' : 'Nouveau produit'">Formulaire produit</h1>
+
+    <div class="form-card">
+        <form th:action="@{/medicaments/save}" th:object="${produit}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+
+            <label for="nom">Nom *</label>
+            <input type="text" id="nom" th:field="*{nom}" required="required"/>
+
+            <label for="description">Description</label>
+            <textarea id="description" th:field="*{description}" rows="3"></textarea>
+
+            <label for="prix">Prix (DH) *</label>
+            <input type="number" id="prix" th:field="*{prix}" step="0.01" min="0" required="required"/>
+
+            <label for="codeBarre">Code-barre</label>
+            <input type="text" id="codeBarre" th:field="*{codeBarre}"/>
+
+            <label for="dateExpiration">Date d'expiration</label>
+            <input type="date" id="dateExpiration" th:field="*{dateExpiration}"/>
+
+            <label for="categorie">Catégorie *</label>
+            <select id="categorie" th:field="*{categorie.id}" required="required">
+                <option value="">-- Choisir --</option>
+                <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.nom}">Catégorie</option>
+            </select>
+
+            <label for="fournisseur">Fournisseur *</label>
+            <select id="fournisseur" th:field="*{fournisseur.id}" required="required">
+                <option value="">-- Choisir --</option>
+                <option th:each="f : ${fournisseurs}" th:value="${f.id}" th:text="${f.nom}">Fournisseur</option>
+            </select>
+
+            <label>Tags</label>
+            <div class="checkbox-group">
+                <label th:each="t : ${tags}">
+                    <input type="checkbox" name="tagIds" th:value="${t.id}"
+                           th:checked="${produit.tags != null and #lists.contains(produit.tags.![id], t.id)}"/>
+                    <span th:text="${t.libelle}">tag</span>
+                </label>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success">Enregistrer</button>
+                <a class="btn btn-primary" th:href="@{/medicaments}">Annuler</a>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>
